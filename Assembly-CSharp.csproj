@@ -64,11 +64,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CoinLifting.cs" />
-    <Compile Include="Assets\Patrol.cs" />
-    <Compile Include="Assets\Robot.cs" />
-    <Compile Include="Assets\SpawnCoins.cs" />
-    <Compile Include="Assets\roborMovement.cs" />
+    <Compile Include="Assets\Scripts\CoinLifting.cs" />
+    <Compile Include="Assets\Scripts\Ground.cs" />
+    <Compile Include="Assets\Scripts\Patrol.cs" />
+    <Compile Include="Assets\Scripts\Robot.cs" />
+    <Compile Include="Assets\Scripts\RobotMovement.cs" />
+    <Compile Include="Assets\Scripts\SpawnCoins.cs" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.22f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
