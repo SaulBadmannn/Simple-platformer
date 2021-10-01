@@ -5,22 +5,22 @@ using UnityEngine;
 public class RobotMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 0;
-    Animator animator;
-    Rigidbody2D rigidbody2D;
-    float directionRobot = 1f;
-    bool isGround = false;
+    private Animator _animator;
+    private Rigidbody2D _rigidbody2D;
+    private float _directionRobot = 1f;
+    private bool _isGround = false;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     private void OnTriggerStay2D(Collider2D collider)
     {
         if (collider.TryGetComponent<Ground>(out Ground ground))
         {
-            isGround = true;
+            _isGround = true;
         }
     }
 
@@ -28,7 +28,7 @@ public class RobotMovement : MonoBehaviour
     {
         if (collider.TryGetComponent<Ground>(out Ground ground)) 
         {
-            isGround = false;
+            _isGround = false;
         }
     }
 
@@ -39,26 +39,26 @@ public class RobotMovement : MonoBehaviour
         if (horizontalInput > 0)
         {
             Debug.Log("Робот идёт вправо");
-            directionRobot = 1f;
-            animator.SetFloat("Speed", horizontalInput);
+            _directionRobot = 1f;
+            _animator.SetBool("IsRun", true);
         }
         else if (horizontalInput < 0)
         {
             Debug.Log("Робот идёт влево");
-            directionRobot = -1f;
-            animator.SetFloat("Speed", horizontalInput * -1);
+            _directionRobot = -1f;
+            _animator.SetBool("IsRun", true);
         }
         else
         {
-            animator.SetFloat("Speed", 0);
+            _animator.SetBool("IsRun", false);
         }
 
-        transform.localScale = new Vector3(directionRobot, 1f, 1f);
+        transform.localScale = new Vector3(_directionRobot, 1f, 1f);
         transform.position = transform.position + new Vector3(horizontalInput * _speed * Time.deltaTime, 0, 0);
 
-        if (Input.GetKey(KeyCode.UpArrow) && isGround)
+        if (Input.GetKey(KeyCode.UpArrow) && _isGround)
         {
-            rigidbody2D.AddForce(Vector2.up * 0.01f);
+            _rigidbody2D.AddForce(Vector2.up * 0.01f);
         }
     }
 }
