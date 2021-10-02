@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Animator))]
+
 public class RobotMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 0;
@@ -9,6 +12,7 @@ public class RobotMovement : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private float _directionRobot = 1f;
     private bool _isGround = false;
+    private const string _isRun = "IsRun";
 
     private void Start()
     {
@@ -34,23 +38,25 @@ public class RobotMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         float horizontalInput = Input.GetAxis("Horizontal");
+
 
         if (horizontalInput > 0)
         {
             Debug.Log("Робот идёт вправо");
             _directionRobot = 1f;
-            _animator.SetBool("IsRun", true);
+            _animator.SetBool(_isRun, true);
         }
         else if (horizontalInput < 0)
         {
             Debug.Log("Робот идёт влево");
             _directionRobot = -1f;
-            _animator.SetBool("IsRun", true);
+            _animator.SetBool(_isRun, true);
         }
         else
         {
-            _animator.SetBool("IsRun", false);
+            _animator.SetBool(_isRun, false);
         }
 
         transform.localScale = new Vector3(_directionRobot, 1f, 1f);
